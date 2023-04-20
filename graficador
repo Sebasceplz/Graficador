@@ -1,0 +1,358 @@
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg,NavigationToolbar2Tk
+from tkinter import*
+import numpy as np
+from tkinter import messagebox as MessageBox
+from math import*
+from sympy import*
+
+root=Tk()
+root.title("Graficador de funciones")
+root.geometry("1200x1400")
+ventanaprincipal=Frame(root,width=1200,height=1200,bg="gray")
+ventanaprincipal.grid()
+fig, ax= plt.subplots()
+
+
+
+def graficar():
+    respuesta=MessageBox.askquestion("AskQuestion","Tu funcion es exponencial?")
+    
+    
+
+    if respuesta== "no":
+        ax.clear()
+        x=np.arange(-10,10)
+        y=(A.get()*x**3)+(B.get()*x**2)+(C.get()*x)+(D.get())
+        ax.plot(x,y)
+        canvas.draw()
+
+    if respuesta== "yes":
+        ax.clear()
+        x=np.arange(-10,10)
+        y=(ExponencialA.get()*np.exp(ExponencialB.get()*x))
+        ax.plot(x,y)
+        canvas.draw() 
+################################################################# ae^bx
+
+########################
+
+
+
+def newtonrapson():
+    
+    respuesta= MessageBox.askquestion("AskQuestion","Desea encontrar las raices?")
+    
+    x = symbols('x')
+    if respuesta=="yes":
+        f =(A.get()*x**3)+(B.get()*x**2)+(C.get()*x)+(D.get()) 
+        f_derivada=diff(f,x)
+        x=PuntoInicial.get()
+        
+        for i in range(0,12):
+            yevalu=eval(str(f))
+            yevalu2=eval(str(f_derivada))
+            xf=x-(yevalu/yevalu2)
+            x=xf
+            print(x)
+        return Resultraiz.set(x)
+
+    
+
+
+
+
+Titulo=Label(ventanaprincipal,
+             text="Matplot + Tkinter",
+             font=("Times",20,"bold"),
+             background="gray",#color de fondo
+             foreground="black", #color de letras
+             width=35,#espacios en X
+             height=2, #espacios en Y
+             
+             #anchor=N, #mover a los lados
+             justify=CENTER,
+             
+            ).place(x=115,y=1)
+
+
+#### Mostrar grafica ####
+canvas=FigureCanvasTkAgg(fig,master=ventanaprincipal)
+canvas.get_tk_widget().place(x=70,y=100)
+
+
+#### Boton para graficar ####
+
+ButtonRegistrar=Button(ventanaprincipal,font=("Times",14,"bold"),text="GRAFICAR",command= graficar).place(x=330,y=600)
+
+
+##################################
+Titulo=Label(ventanaprincipal,
+             text="Matplot + Tkinter",
+             font=("Times",20,"bold"),
+             background="gray",#color de fondo
+             foreground="black", #color de letras
+             width=35,#espacios en X
+             height=2, #espacios en Y
+             
+             #anchor=N, #mover a los lados
+             justify=CENTER,
+             
+            ).place(x=115,y=1)
+###############################
+
+formadelafuncion=Label(ventanaprincipal,
+             text="f(x)= ax^3 + bx^2 + cx + d ",
+             font=("Times",15,"bold"),
+             background="gray",#color de fondo
+             foreground="black", #color de letras
+             width=35,#espacios en X
+             height=2, #espacios en Y
+             
+             #anchor=N, #mover a los lados
+             justify=CENTER,
+             
+            ).place(x=180,y=650)
+
+#######################################
+###########################################################################################
+A=IntVar()
+EntryA=Entry(ventanaprincipal,font=("Times",12),textvariable=A).place(x=25,y=750)
+
+TextoDeA=Label(ventanaprincipal,
+             text="ax^3",
+             font=("Times",12,"bold"),
+             background="gray",#color de fondo
+             foreground="black", #color de letras
+             width=20,#espacios en X
+             height=2, #espacios en Y
+             
+             #anchor=N, #mover a los lados
+             justify=CENTER,
+             
+            ).place(x=25,y=700)
+################################################################################################
+
+###############################################################################################
+B=IntVar()
+EntryB=Entry(ventanaprincipal,font=("Times",12),textvariable=B).place(x=225,y=750)
+
+TextoDeB=Label(ventanaprincipal,
+             text="bx^2",
+             font=("Times",12,"bold"),
+             background="gray",#color de fondo
+             foreground="black", #color de letras
+             width=20,#espacios en X
+             height=2, #espacios en Y
+             
+             #anchor=N, #mover a los lados
+             justify=CENTER,
+             
+            ).place(x=225,y=700)
+##########################################################################################################
+
+
+###########################################################################################################
+C=IntVar()
+EntryC=Entry(ventanaprincipal,font=("Times",12),textvariable=C).place(x=425,y=750)
+
+TextoDeC=Label(ventanaprincipal,
+             text="cx",
+             font=("Times",12,"bold"),
+             background="gray",#color de fondo
+             foreground="black", #color de letras
+             width=20,#espacios en X
+             height=2, #espacios en Y
+             
+             #anchor=N, #mover a los lados
+             justify=CENTER,
+             
+            ).place(x=425,y=700)
+###############################################################################################################
+
+
+###############################################################################################################
+D=IntVar()
+EntryD=Entry(ventanaprincipal,font=("Times",12),textvariable=D).place(x=625,y=750)
+
+TextoDeD=Label(ventanaprincipal,
+             text="d",
+             font=("Times",12,"bold"),
+             background="gray",#color de fondo
+             foreground="black", #color de letras
+             width=20,#espacios en X
+             height=2, #espacios en Y
+             
+             #anchor=N, #mover a los lados
+             justify=CENTER,
+             
+            ).place(x=625,y=700)
+##################################################################################################################
+
+#####################################################################################################33
+FuncionExponencial=Label(ventanaprincipal,
+             text="f(x)= ae^bx",
+             font=("Times",15,"bold"),
+             background="gray",#color de fondo
+             foreground="black", #color de letras
+             width=10,#espacios en X
+             height=2, #espacios en Y
+             
+             #anchor=N, #mover a los lados
+             justify=CENTER,
+             
+            ).place(x=350,y=780)
+##########################################################################################################3
+
+
+################################################
+ExponencialA=IntVar()
+EntryC=Entry(ventanaprincipal,font=("Times",12),textvariable=ExponencialA).place(x=150,y=870)
+
+TextoExpoA=Label(ventanaprincipal,
+             text="a",
+             font=("Times",15,"bold"),
+             background="gray",#color de fondo
+             foreground="black", #color de letras
+             width=10,#espacios en X
+             height=2, #espacios en Y
+             
+             #anchor=N, #mover a los lados
+             justify=CENTER,
+             
+            ).place(x=170,y=810)
+#################################################
+
+
+###################################################################
+
+
+ExponencialB=IntVar()
+EntryC=Entry(ventanaprincipal,font=("Times",12),textvariable=ExponencialB).place(x=450,y=870)
+TextoExpoA=Label(ventanaprincipal,
+             text="b",
+             font=("Times",15,"bold"),
+             background="gray",#color de fondo
+             foreground="black", #color de letras
+             width=10,#espacios en X
+             height=2, #espacios en Y
+             
+             #anchor=N, #mover a los lados
+             justify=CENTER,
+             
+            ).place(x=480,y=810)
+######################################################################
+
+TextoExpoA=Label(ventanaprincipal,
+             text="a",
+             font=("Times",15,"bold"),
+             background="gray",#color de fondo
+             foreground="black", #color de letras
+             width=10,#espacios en X
+             height=2, #espacios en Y
+             
+             #anchor=N, #mover a los lados
+             justify=CENTER,
+             
+            ).place(x=170,y=810)
+#################################################
+
+
+###################################################################
+
+################################################################### New Raphson ######################################################
+TextoBuscadorRaiz=Label(ventanaprincipal,
+             text="Raices de la funcion",
+             font=("Times",15,"bold"),
+             background="gray",#color de fondo
+             foreground="black", #color de letras
+             width=15,#espacios en X
+             height=2, #espacios en Y
+             
+             #anchor=N, #mover a los lados
+             justify=CENTER,
+             
+            ).place(x=850,y=100)
+
+
+
+
+TextoXo=Label(ventanaprincipal,
+             text="Xn",
+             font=("Times",15,"bold"),
+             background="gray",#color de fondo
+             foreground="black", #color de letras
+             width=15,#espacios en X
+             height=2, #espacios en Y
+             
+             #anchor=N, #mover a los lados
+             justify=CENTER,
+             
+            ).place(x=730,y=200)
+
+
+PuntoInicial=IntVar()
+NewPI=Entry(ventanaprincipal,font=("Times",12),textvariable=PuntoInicial).place(x=750,y=250)
+
+
+
+TextoRaizaproximada=Label(ventanaprincipal,
+             text="Raiz",
+             font=("Times",15,"bold"),
+             background="gray",#color de fondo
+             foreground="black", #color de letras
+             width=15,#espacios en X
+             height=2, #espacios en Y
+             
+             #anchor=N, #mover a los lados
+             justify=CENTER,
+             
+            ).place(x=950,y=200)
+
+
+######################################################################################################################
+Resultadoraiz=IntVar()
+NewPI=Entry(ventanaprincipal,font=("Times",12),textvariable=Resultadoraiz).place(x=970,y=250)
+ButtonEncontrarraiz=Button(ventanaprincipal,font=("Times",14,"bold"),text="Encontrar raiz",command=newtonrapson).place(x=880,y=350)
+
+
+
+Resultraiz=IntVar()
+TextoResultadoRaiz=Label(ventanaprincipal,
+             textvariable=Resultraiz,
+             font=("Times",15,"bold"),
+             background="gray",#color de fondo
+             foreground="black", #color de letras
+             width=200 ,     #espacios en X
+             height=2, #espacios en Y
+             
+             #anchor=N, #mover a los lados
+             justify=CENTER,
+             
+            ).place(x=950,y=240)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+root.mainloop()
